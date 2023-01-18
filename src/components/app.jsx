@@ -1,19 +1,31 @@
 import React, { Component } from "react";
-import flats from '../../data/flat.js';
+import FlatList from './flat_list'
+import Map from './map'
+
+
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      marker_latitude: null,
+      marker_longitude: null
     };
   };
 
+  update_coordinates = (latitude, longitude) => {
+    this.setState({
+      marker_latitude: latitude,
+      marker_longitude: longitude,
+    });
+  }
+
   render() {
-    console.log(flats);
     return (
       <div>
-        Hello
+        <FlatList updateFunction={this.update_coordinates} />
+        <Map marker_latitude={this.state.marker_latitude} marker_longitude={this.state.marker_longitude} />
       </div>
     );
   }
